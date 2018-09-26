@@ -207,59 +207,74 @@ public class TicTacToeModel {
 
         //Check Row for win//
             for (int i = 0; i < width; ++i)
-            {
+            {                
                 for(int j = 0; j < width; ++j)
                 {
-                    if(grid[i][j] == mark){
+                    if(grid[i][j] == mark)
+                    {
                         counter++;
                     }
-                    
                     if(counter == width)
                     {
                         winner = true;
+                        break;
                     }
                 }
+                if(winner == true)
+                {
+                    break;
+                }
+                counter = 0;
             }
         //Check collumn for win//
             counter = 0;
             for(int i = 0; i < width; ++i)
-            {
+            {                  
                 for(int j = 0; j < width && j < i; ++j)
                 {
-                    if(grid[j][i] == mark){
-                       counter++;
-                    }
-                    if(counter == width)
+                    if(grid[j][i] == mark)
                     {
-                        winner = true;
+                        counter++;
                     }
-                }
-             }
+                        if(counter == width)
+                        {
+                            winner = true;
+                            break;
+                        }
+                        if(winner == true)
+                        {
+                            break;
+                        }
+                    
+                } 
+           }
         //Check diagonals for win//   
-            counter = 0;
+            int dCounter = 0;
             for(int i = 0; i < width; ++i) //left diagonal
             {
-                if(grid[i][width-i-1] == mark)
+                if(grid[i][i] == mark)
                 {
-                    counter++;
+                    dCounter++;
                 }
                
-                if(counter == width)
+                if(dCounter == width)
                 {
                     winner = true;
                 }
             }
             
+            int dCounter2 = 0;
+            
             for(int j = 0; j < width; ++j)  // right diag
          {
               if(grid[j][width-j-1] == mark)
               {
-                  counter++;
+                  dCounter2++;
               }
               
          }
 
-          if(counter == width)
+          if(dCounter2 == width)
               {
                   winner = true;
               }
@@ -275,27 +290,26 @@ public class TicTacToeModel {
         squares of the board to see if the game is a tie */
 
         /* INSERT YOUR CODE HERE */
-        boolean tie = false;
+        boolean tie = true;
         int counter = 0;
         
-        for(int i = 0; i < width; i++)
+        for(int i = 0; i < width; ++i)
         {
-            for(int j = 0; j < width ; j++)
+            for(int j = 0; j < width ; ++j)
             {
-                if(grid[i][j] != Mark.EMPTY)
+                if(grid[i][j] == Mark.EMPTY)
                 {
-                    counter++;
+                    tie = false;
+                }
+                else
+                {
+                    tie = false;
+                    break;
                 }
             }
         }
-        if (counter == (width * width))
-        {
-            tie = true;
-        }
         return tie;
-        
     }
-
     public boolean isGameover() {
         
         /* Return true if the game is over */
