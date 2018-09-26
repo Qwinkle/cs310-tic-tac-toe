@@ -2,7 +2,7 @@ package edu.jsu.mcis;
 
 import java.util.Scanner;
 
-public class TicTacToeController {
+public class TicTacToeController extends TicTacToeModel{
 
     private TicTacToeModel model;
     private TicTacToeView view;
@@ -26,6 +26,7 @@ public class TicTacToeController {
     public void controlModel() {
         
         /* Prompt player for next move using view's showNextMovePrompt() */
+        int x,y;
         
         view.showNextMovePrompt();
         
@@ -35,6 +36,20 @@ public class TicTacToeController {
            error message using view's showInputError() if input is invalid. */
         
         /* INSERT YOUR CODE HERE */
+        
+        x = keyboard.nextInt();
+        y = keyboard.nextInt();
+        
+        if((model.isValidSquare(x,y) == true) && (model.isSquareMarked(x,y) == false))
+        {
+            model.makeMark(x,y);
+        }
+        else
+        {
+                view.showInputError();
+                x = keyboard.nextInt();
+                y = keyboard.nextInt();
+        }
         
     }
 
